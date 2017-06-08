@@ -21,6 +21,7 @@ const app = {
         this.list.appendChild(listItem)
         
         //TODO: Add dino to this.dinos array
+        this.dinos.push(dino)
     },
 
     renderListItem (dino){
