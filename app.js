@@ -56,8 +56,8 @@ const app = {
 
         const up = document.createElement('button')
         const down = document.createElement('button')
-        up.textContent = '㆖'
-        down.textContent = '下'
+        up.textContent = '⬆︎'
+        down.textContent = '⬇︎'
         up.className = 'button'
         down.className = 'button'
 
