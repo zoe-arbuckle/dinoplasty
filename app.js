@@ -29,11 +29,11 @@ const app = {
         }
 
         const listItem = this.renderListItem(dino)
-        this.list.appendChild(listItem)
+        this.list.insertBefore(listItem, this.list.firstChild)
         e.target.reset()
         
         //TODO: Add dino to this.dinos array
-        this.dinos.push(dino)
+        this.dinos.unshift(dino)
         window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
     },
 
@@ -41,6 +41,7 @@ const app = {
         const item = document.createElement('li')
         item.textContent = dino.name
 
+        //this.template.cloneNode(true) to copy the template - much shorter
         const del = document.createElement('button')
         del.type = 'button'
         del.textContent = 'delete'
@@ -91,6 +92,16 @@ const app = {
 
     deleteItem (e){
         e.target.parentNode.remove()
+
+        const index = -1;
+        for(let i=0; i < this.dinos.length; i++){
+            if(this.dinos[i].id === e.target.parentNode.id){
+                index = i;
+                break;
+            }
+        }
+        this.dinos.splice(index, 1)
+        //find a way to remove from the localstorage too
     },
 
     promote (e){
@@ -109,4 +120,5 @@ const app = {
 app.init({
     formSelector: '#dino-form', 
     listSelector: '#dino-list',
+    //add a template selector
 })
