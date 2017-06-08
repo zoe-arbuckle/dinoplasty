@@ -45,12 +45,28 @@ const app = {
 
         const up = document.createElement('button')
         const down = document.createElement('button')
+        up.textContent = '㆖'
+        down.textContent = '下'
+        up.className = 'button'
+        down.className = 'button'
+        up.addEventListener('click', this.moveUp)
+        down.addEventListener('click', this.moveDown)
         
 
         item.appendChild(pro)
         item.appendChild(del)
+        item.appendChild(up)
+        item.appendChild(down)
 
         return item
+    }, 
+
+    moveUp (){
+
+    },
+    
+    moveDown (){
+
     }, 
 
     deleteItem (e){
