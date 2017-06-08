@@ -3,6 +3,16 @@ const app = {
         this.max = 0
         this.list = document.querySelector(selectors.listSelector)
         this.dinos = []
+        if(window.localStorage.getItem('dinos')){
+            this.dinos = Object.keys(window.localStorage.getItem('dinos')).map(function (key){
+                    return window.localStorage.getItem('dinos')[key];
+                })
+            for(let i = 0; i < this.dinos.length; i++){
+                this.renderListItem(this.dinos[i])
+            }
+        }else {
+            window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
+        }
         document.
             querySelector(selectors.formSelector).
             addEventListener('submit', this.addDino.bind(this))
@@ -22,6 +32,7 @@ const app = {
         
         //TODO: Add dino to this.dinos array
         this.dinos.push(dino)
+        window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
     },
 
     renderListItem (dino){
@@ -49,6 +60,7 @@ const app = {
         down.textContent = '下'
         up.className = 'button'
         down.className = 'button'
+
         up.addEventListener('click', this.moveUp)
         down.addEventListener('click', this.moveDown)
         
@@ -61,12 +73,18 @@ const app = {
         return item
     }, 
 
-    moveUp (){
-
+    moveUp (e){
+        const li = e.target.parentNode;
+        if(li.previousSibling){
+            li.parentNode.insertBefore(li, li.previousSibling)
+        }
     },
     
-    moveDown (){
-
+    moveDown (e){
+        const li = e.target.parentNode;
+        if(li.nextSibling){
+            li.parentNode.insertBefore(li.nextSibling, li)
+        }
     }, 
 
     deleteItem (e){

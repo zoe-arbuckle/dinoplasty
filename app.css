@@ -9,7 +9,8 @@ button:hover{
 }
 
 li > button{
-    margin-left: 10px;
+    margin-left: 1rem;
+    padding-left: 1rem;
 }
 
 li{
