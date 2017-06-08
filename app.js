@@ -16,6 +16,7 @@ const app = {
         document.
             querySelector(selectors.formSelector).
             addEventListener('submit', this.addDino.bind(this))
+
     },
 
     addDino (e){
@@ -29,6 +30,7 @@ const app = {
 
         const listItem = this.renderListItem(dino)
         this.list.appendChild(listItem)
+        e.target.reset()
         
         //TODO: Add dino to this.dinos array
         this.dinos.push(dino)
