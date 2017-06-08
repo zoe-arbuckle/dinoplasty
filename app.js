@@ -91,14 +91,16 @@ const app = {
 
     deleteItem (e){
         e.target.parentNode.remove()
-
         for(let i=0; i < this.dinos.length; i++){
             if(this.dinos[i].id === e.target.parentNode.id){
-                this.dinos.splice(index, 1)
+                this.dinos.splice(i, 1)
+                window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
+                //will not work becuase li not made from form does not have id
                 break;
             }
+            console.log(this.dinos[i].id)
+            console.log(e.target.parentNode.id)
         }
-        //find a way to remove from the localstorage too
     },
 
     promote (e){
