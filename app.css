@@ -1,0 +1,13 @@
+.hollow.button:hover{
+    color: white;
+    background-color: lightblue;
+}
+
+button:hover{
+    box-shadow: 5px 5px 5px darkgray;
+}
+
+.button{
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}

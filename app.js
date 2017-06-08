@@ -28,8 +28,31 @@ const app = {
         const item = document.createElement('li')
         item.textContent = dino.name
 
+        const del = document.createElement('button');
+        del.type = 'button'
+        del.textContent = 'delete'
+        del.className = 'hollow button'
+        del.addEventListener('click', this.deleteItem.bind(this))
+        const pro = document.createElement('button')
+        pro.type = 'button'
+        pro.className = 'hollow button'
+        pro.textContent = 'promote'
+        pro.addEventListener('click', this.promote)
+
+        item.appendChild(pro)
+        item.appendChild(del)
+
         return item
     }, 
+
+    deleteItem (e){
+        e.target.parentNode.remove()
+    },
+
+    promote (){
+
+    },
+
 }
 
 app.init({
