@@ -12,7 +12,7 @@ const app = {
         e.preventDefault()
 
         const dino = {
-            name: e.target.dinoName.value,
+            name: e.target.dinoName.value.toUpperCase(),
             id: ++this.max,
 
         }
@@ -28,16 +28,24 @@ const app = {
         const item = document.createElement('li')
         item.textContent = dino.name
 
-        const del = document.createElement('button');
+        const del = document.createElement('button')
         del.type = 'button'
         del.textContent = 'delete'
-        del.className = 'hollow button'
+        del.className = 'button'
+        del.style.border = '1px solid darkgray'
         del.addEventListener('click', this.deleteItem.bind(this))
         const pro = document.createElement('button')
         pro.type = 'button'
-        pro.className = 'hollow button'
+        pro.className = 'button'
         pro.textContent = 'promote'
+        pro.style.border = '1px solid darkgray'
         pro.addEventListener('click', this.promote)
+        item.style.border='initial'
+        item.style.boxShadow = 'initial'
+
+        const up = document.createElement('button')
+        const down = document.createElement('button')
+        
 
         item.appendChild(pro)
         item.appendChild(del)
@@ -49,8 +57,15 @@ const app = {
         e.target.parentNode.remove()
     },
 
-    promote (){
-
+    promote (e){
+        if(e.target.parentNode.style.border == 'initial'){
+             e.target.parentNode.style.border = '1px solid darkslateblue'
+             e.target.parentNode.style.boxShadow = '5px 5px 5px gray'
+        }else{
+            e.target.parentNode.style.border = 'initial'
+            e.target.parentNode.style.boxShadow = 'initial'
+        }
+       
     },
 
 }
