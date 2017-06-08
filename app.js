@@ -4,11 +4,10 @@ const app = {
         this.list = document.querySelector(selectors.listSelector)
         this.dinos = []
         if(window.localStorage.getItem('dinos')){
-            this.dinos = Object.keys(window.localStorage.getItem('dinos')).map(function (key){
-                    return window.localStorage.getItem('dinos')[key];
-                })
+            this.dinos = JSON.parse(window.localStorage.getItem('dinos'))
             for(let i = 0; i < this.dinos.length; i++){
-                this.renderListItem(this.dinos[i])
+                const item = this.renderListItem(this.dinos[i])
+                this.list.insertBefore(item, this.list.firstChild)
             }
         }else {
             window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
@@ -93,14 +92,12 @@ const app = {
     deleteItem (e){
         e.target.parentNode.remove()
 
-        const index = -1;
         for(let i=0; i < this.dinos.length; i++){
             if(this.dinos[i].id === e.target.parentNode.id){
-                index = i;
+                this.dinos.splice(index, 1)
                 break;
             }
         }
-        this.dinos.splice(index, 1)
         //find a way to remove from the localstorage too
     },
 
