@@ -28,3 +28,7 @@ li:nth-of-type(odd){
 .template{
     visibility: hidden;
 }
+
+.actions{
+    float: right;
+}
