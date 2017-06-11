@@ -33,7 +33,7 @@ const app = {
         const dino = {
             name: e.target.dinoName.value.toUpperCase(),
             id: ++this.max,
-
+            fav: false,
         }
 
         const listItem = this.renderListItem(dino)
@@ -49,6 +49,7 @@ const app = {
         item.querySelector('.dino-name').textContent = dino.name
         item.dataset.id = dino.id
         item.classList.remove('template')
+        item.style.border = 'initial'
 
         item.querySelector('.remove').addEventListener('click', this.deleteItem.bind(this))
         item.querySelector('.fav').addEventListener('click', this.promote)
@@ -86,10 +87,10 @@ const app = {
     promote (e){
         if(e.target.closest('.dino').style.border === 'initial'){
              e.target.closest('.dino').style.border = '1px solid darkslateblue'
-             e.target.closest('.dino').style.boxShadow = '5px 5px 5px gray'
+             e.target.closest('.dino').style.backgroundColor = 'lightyellow'
         }else{
             e.target.closest('.dino').style.border = 'initial'
-            e.target.closest('.dino').style.boxShadow = 'initial'
+            e.target.closest('.dino').style.backgroundColor = 'whitesmoke'
         }
        
     },

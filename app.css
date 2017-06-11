@@ -4,14 +4,8 @@ button:hover{
 
 li{
     font-family: Franklin Gothic Medium, Arial Narrow, Arial, sans-serif;
-}
-
-li:nth-of-type(even){
-    background-color: lightgray;
-}
-
-li:nth-of-type(odd){
     background-color: whitesmoke;
+    margin: 3px;
 }
 
 .template{
