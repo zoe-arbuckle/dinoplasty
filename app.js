@@ -22,18 +22,25 @@ const app = {
     addDinoLocal (dino){
         const listItem = this.renderListItem(dino)
         this.list.insertBefore(listItem, this.list.firstChild)
-
         listItem.dataset.id = ++this.max
         dino.id = listItem.dataset.id
     },
 
     addDino (e){
         e.preventDefault()
+        let check = ''
+
+        const types = document.getElementsByName('dino-type-radio')
+        for(let i=0; i < types.length; i++){
+            if(types[i].checked){
+                check = types[i].value.toUpperCase()
+            }
+        }
 
         const dino = {
             name: e.target.dinoName.value.toUpperCase(),
             id: ++this.max,
-            fav: false,
+            type: check,
         }
 
         const listItem = this.renderListItem(dino)
@@ -47,6 +54,7 @@ const app = {
     renderListItem (dino){
         const item = this.template.cloneNode(true)
         item.querySelector('.dino-name').textContent = dino.name
+        item.querySelector('.dino-type').textContent = dino.type
         item.dataset.id = dino.id
         item.classList.remove('template')
         item.style.border = 'initial'
@@ -92,7 +100,6 @@ const app = {
             e.target.closest('.dino').style.border = 'initial'
             e.target.closest('.dino').style.backgroundColor = 'whitesmoke'
         }
-       
     },
 
 }
