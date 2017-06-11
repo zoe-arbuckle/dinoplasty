@@ -24,4 +24,4 @@
 * Edit the names of dinosaurs that are already in the list, make sure changes persist (content editable)
 
 ###Super Mega Bonus Credit Hyper Fighting
-* Have a good weekend!
+* Have a good weekend! (success)

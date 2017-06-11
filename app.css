@@ -2,17 +2,6 @@ button:hover{
     box-shadow: 5px 5px 5px darkgray;
 }
 
-.button{
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    margin: 0px 5px;
-}
-
-li > button{
-    margin-left: 1rem;
-    padding-left: 1rem;
-}
-
 li{
     font-family: Franklin Gothic Medium, Arial Narrow, Arial, sans-serif;
 }
@@ -34,5 +23,6 @@ li:nth-of-type(odd){
 }
 
 .dino{
+    overflow: hidden;
     clear: both;
 }
