@@ -7,9 +7,9 @@ const app = {
         if(window.localStorage.getItem('dinos')){
             this.dinos = JSON.parse(window.localStorage.getItem('dinos'))
             for(let i = 0; i < this.dinos.length; i++){
-                const item = this.renderListItem(this.dinos[i])
-                this.list.insertBefore(item, this.list.firstChild)
+                this.addDinoLocal(this.dinos[i])
             }
+            window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
         }else {
             window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
         }
@@ -19,8 +19,12 @@ const app = {
 
     },
 
-    addDinoLocal (e){
+    addDinoLocal (dino){
+        const listItem = this.renderListItem(dino)
+        this.list.insertBefore(listItem, this.list.firstChild)
 
+        listItem.dataset.id = ++this.max
+        dino.id = listItem.dataset.id
     },
 
     addDino (e){
