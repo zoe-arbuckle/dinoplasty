@@ -54,7 +54,7 @@ const app = {
     renderListItem (dino){
         const item = this.template.cloneNode(true)
         item.querySelector('.dino-name').textContent = dino.name
-        item.querySelector('.dino-type').textContent = dino.type
+        item.querySelector('.dino-type').textContent = '(' + dino.type + ')'
         item.dataset.id = dino.id
         item.classList.remove('template')
         item.style.border = 'initial'
@@ -63,6 +63,7 @@ const app = {
         item.querySelector('.fav').addEventListener('click', this.promote)
         item.querySelector('.up').addEventListener('click', this.moveUp)
         item.querySelector('.down').addEventListener('click', this.moveDown)
+        item.querySelector('.edit').addEventListener('click', this.edit)
 
         return item
     }, 
@@ -100,6 +101,10 @@ const app = {
             e.target.closest('.dino').style.border = 'initial'
             e.target.closest('.dino').style.backgroundColor = 'whitesmoke'
         }
+    },
+
+    edit(e){
+        
     },
 
 }
