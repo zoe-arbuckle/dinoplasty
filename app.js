@@ -3,6 +3,7 @@ const app = {
         this.max = 0
         this.list = document.querySelector(selectors.listSelector)
         this.dinos = []
+        this.template = document.querySelector(selectors.templateSelector)
         if(window.localStorage.getItem('dinos')){
             this.dinos = JSON.parse(window.localStorage.getItem('dinos'))
             for(let i = 0; i < this.dinos.length; i++){
@@ -31,46 +32,16 @@ const app = {
         this.list.insertBefore(listItem, this.list.firstChild)
         e.target.reset()
         
-        //TODO: Add dino to this.dinos array
         this.dinos.unshift(dino)
         window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
     },
 
     renderListItem (dino){
-        const item = document.createElement('li')
-        item.textContent = dino.name
+        const item = this.template.cloneNode(true)
+        item.querySelector('.dino-name').textContent = dino.name
+        item.classList.remove('template')
 
         //this.template.cloneNode(true) to copy the template - much shorter
-        const del = document.createElement('button')
-        del.type = 'button'
-        del.textContent = 'delete'
-        del.className = 'button'
-        del.style.border = '1px solid darkgray'
-        del.addEventListener('click', this.deleteItem.bind(this))
-        const pro = document.createElement('button')
-        pro.type = 'button'
-        pro.className = 'button'
-        pro.textContent = 'promote'
-        pro.style.border = '1px solid darkgray'
-        pro.addEventListener('click', this.promote)
-        item.style.border='initial'
-        item.style.boxShadow = 'initial'
-
-        const up = document.createElement('button')
-        const down = document.createElement('button')
-        up.textContent = '⬆︎'
-        down.textContent = '⬇︎'
-        up.className = 'button'
-        down.className = 'button'
-
-        up.addEventListener('click', this.moveUp)
-        down.addEventListener('click', this.moveDown)
-        
-
-        item.appendChild(pro)
-        item.appendChild(del)
-        item.appendChild(up)
-        item.appendChild(down)
 
         return item
     }, 
@@ -119,5 +90,5 @@ const app = {
 app.init({
     formSelector: '#dino-form', 
     listSelector: '#dino-list',
-    //add a template selector
+    templateSelector: '.dino.template',
 })
