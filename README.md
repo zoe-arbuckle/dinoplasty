@@ -25,3 +25,7 @@
 
 ### Super Mega Bonus Credit Hyper Fighting
 * Have a good weekend! (success)
+
+## Day 5 Homework -
+* Maintain multiple different lists based on diet - categorize or make a whole new category (messages)
+
