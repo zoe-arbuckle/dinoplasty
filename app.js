@@ -62,6 +62,8 @@ const app = {
         item.dataset.id = dino.id
         item.classList.remove('template')
 
+        item.querySelector('.dino-name').addEventListener('keypress', this.saveOnEnter.bind(this, dino))
+
         item.querySelector('.remove').addEventListener('click', this.deleteItem.bind(this))
         item.querySelector('.fav').addEventListener('click', this.promote.bind(this, dino))
         item.querySelector('.up').addEventListener('click', this.moveUp.bind(this, dino))
@@ -130,7 +132,7 @@ const app = {
     edit(dino, e){
         const spanType = e.target.closest('.dino').querySelector('.dino-type')
         const spanName = e.target.closest('.dino').querySelector('.dino-name')
-        const btn = e.currentTarget
+        const btn = e.target.closest('.dino').querySelector('.edit.button')
         const icon = btn.querySelector('i.fa')
 
         if(spanType.isContentEditable){
@@ -150,6 +152,12 @@ const app = {
             spanType.contentEditable = true
             spanName.contentEditable = true
             spanName.focus()
+        }
+    },
+
+    saveOnEnter(dino, e){
+        if(e.key === 'Enter'){
+            this.edit(dino, e)
         }
     },
 
