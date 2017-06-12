@@ -1,5 +1,5 @@
-const app = {
-    init (selectors){
+class App {
+    constructor (selectors){
         this.max = 0
         this.list = document.querySelector(selectors.listSelector)
         this.dinos = []
@@ -17,7 +17,7 @@ const app = {
             querySelector(selectors.formSelector).
             addEventListener('submit', this.addDino.bind(this))
 
-    },
+    }
 
     addDinoLocal (dino){
         const listItem = this.renderListItem(dino)
@@ -30,7 +30,7 @@ const app = {
         if(dino.fav){
             listItem.classList.add('fav')
         }
-    },
+    }
 
     addDino (e){
         e.preventDefault()
@@ -56,7 +56,7 @@ const app = {
         
         this.dinos.push(dino)
         window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
-    },
+    }
 
     renderListItem (dino){
         const item = this.template.cloneNode(true)
@@ -76,7 +76,7 @@ const app = {
         item.querySelector('.edit').addEventListener('click', this.edit.bind(this, dino))
 
         return item
-    }, 
+    } 
 
     moveUp (dino, e){
         const li = e.target.closest('.dino');
@@ -91,7 +91,7 @@ const app = {
             this.dinos[index] = previousDino
             window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
         }
-    },
+    }
     
     moveDown (dino, e){
         const li = e.target.closest('.dino');
@@ -105,7 +105,7 @@ const app = {
             this.dinos[index] = nextDino
             window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
         }
-    }, 
+    }
 
     deleteItem (e){
         e.target.closest('.dino').remove()
@@ -116,7 +116,7 @@ const app = {
                 break;
             }
         }
-    },
+    }
 
     promote (dino, e){
         const item = e.target.closest('.dino')
@@ -132,7 +132,7 @@ const app = {
         }
 
         window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
-    },
+    }
 
     edit(dino, e){
         const spanType = e.target.closest('.dino').querySelector('.dino-type')
@@ -158,17 +158,17 @@ const app = {
             spanName.contentEditable = true
             spanName.focus()
         }
-    },
+    }
 
     saveOnEnter(dino, e){
         if(e.key === 'Enter'){
             this.edit(dino, e)
         }
-    },
+    }
 
 }
 
-app.init({
+const app = new App({
     formSelector: '#dino-form', 
     listSelector: '#dino-list',
     templateSelector: '.dino.template',
