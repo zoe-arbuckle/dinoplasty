@@ -54,16 +54,16 @@ const app = {
     renderListItem (dino){
         const item = this.template.cloneNode(true)
         item.querySelector('.dino-name').textContent = dino.name
-        item.querySelector('.dino-type').textContent = '(' + dino.type + ')'
+        item.querySelector('.dino-type').textContent = dino.type
         item.dataset.id = dino.id
         item.classList.remove('template')
         item.style.border = 'initial'
 
         item.querySelector('.remove').addEventListener('click', this.deleteItem.bind(this))
         item.querySelector('.fav').addEventListener('click', this.promote)
-        item.querySelector('.up').addEventListener('click', this.moveUp)
-        item.querySelector('.down').addEventListener('click', this.moveDown)
-        item.querySelector('.edit').addEventListener('click', this.edit)
+        item.querySelector('.up').addEventListener('click', this.moveUp.bind(this))
+        item.querySelector('.down').addEventListener('click', this.moveDown.bind(this))
+        item.querySelector('.edit').addEventListener('click', this.edit.bind(this))
 
         return item
     }, 
@@ -104,7 +104,24 @@ const app = {
     },
 
     edit(e){
-        
+        const spanType = e.target.closest('.dino').querySelector('.dino-type')
+        const spanName = e.target.closest('.dino').querySelector('.dino-name')
+        if(spanType.isContentEditable){
+            this.dinos[e.target.closest('.dino').dataset.id - 1].type = spanType.textContent.toUpperCase()
+            this.dinos[e.target.closest('.dino').dataset.id - 1].name = spanName.textContent.toUpperCase()
+            window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
+            e.target.style.color = 'black'
+            e.target.classList.remove('warning')
+            e.target.classList.add('success')
+            spanType.contentEditable = false
+            spanName.contentEditable = false
+        } else　{
+            e.target.style.color = 'white'
+            e.target.classList.add('warning')
+            e.target.classList.remove('success')
+            spanType.contentEditable = true
+            spanName.contentEditable = true
+        }
     },
 
 }

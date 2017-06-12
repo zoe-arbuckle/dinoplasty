@@ -1,3 +1,7 @@
+head, title{
+    color: darkblue;
+}
+    
 button:hover{
     box-shadow: 5px 5px 5px darkgray;
 }
