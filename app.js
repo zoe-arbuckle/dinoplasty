@@ -21,7 +21,7 @@ const app = {
 
     addDinoLocal (dino){
         const listItem = this.renderListItem(dino)
-        this.list.insertBefore(listItem, this.list.firstChild)
+        this.list.appendChild(listItem)
         listItem.dataset.id = ++this.max
         dino.id = listItem.dataset.id
         if(dino.fav){
@@ -48,10 +48,10 @@ const app = {
         }
 
         const listItem = this.renderListItem(dino)
-        this.list.insertBefore(listItem, this.list.firstChild)
+        this.list.appendChild(listItem)
         e.target.reset()
         
-        this.dinos.unshift(dino)
+        this.dinos.push(dino)
         window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
     },
 
@@ -76,9 +76,10 @@ const app = {
         const index = this.dinos.findIndex((currentDino, i)=> {
             return currentDino.id === dino.id
         })
-        if(index > -1){
+        console.log(index)
+        if(index > 0){
             this.list.insertBefore(li, li.previousSibling)
-            
+
             const previousDino = this.dinos[index-1]
             this.dinos[index-1] = dino
             this.dinos[index] = previousDino
@@ -93,7 +94,6 @@ const app = {
         })
         if(index < this.dinos.length - 1){
             this.list.insertBefore(li.nextSibling, li)
-            
             const nextDino = this.dinos[index+1]
             this.dinos[index+1] = dino
             this.dinos[index] = nextDino
