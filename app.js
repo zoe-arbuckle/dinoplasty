@@ -61,6 +61,7 @@ const app = {
     renderListItem (dino){
         const item = this.template.cloneNode(true)
         item.querySelector('.dino-name').textContent = dino.name
+        item.querySelector('.dino-name').setAttribute('title', dino.name)
         item.querySelector('.dino-type').textContent = dino.type
         item.dataset.id = dino.id
         item.classList.remove('template')
