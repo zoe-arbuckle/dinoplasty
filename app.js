@@ -125,6 +125,7 @@ const app = {
             e.target.classList.remove('success')
             spanType.contentEditable = true
             spanName.contentEditable = true
+            spanName.focus()
         }
     },
 
