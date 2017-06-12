@@ -73,7 +73,7 @@ const app = {
         if(li.previousSibling){
             li.parentNode.insertBefore(li, li.previousSibling)
         }
-        //try to persist by changing the order of the array as well
+        //TODO: try to persist by changing the order of the array as well
     },
     
     moveDown (e){
@@ -95,7 +95,7 @@ const app = {
     },
 
     promote (e){
-        //try to find a way to get favorites to persist as well
+        //TODO: try to find a way to get favorites to persist as well
         if(e.target.closest('.dino').style.border === 'initial'){
              e.target.closest('.dino').style.border = '1px solid darkslateblue'
              e.target.closest('.dino').style.backgroundColor = 'lightyellow'
