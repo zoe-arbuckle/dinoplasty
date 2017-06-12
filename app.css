@@ -27,13 +27,7 @@ button:hover{
     box-shadow: 5px 5px 5px darkgray;
 }
 
-li{
-    font-family: Franklin Gothic Medium, Arial Narrow, Arial, sans-serif;
-    background-color: white;
-    margin: 3px;
-}
-
-.template{
+.dino.template{
     visibility: hidden;
 }
 
@@ -42,6 +36,22 @@ li{
 }
 
 .dino{
-    overflow: hidden;
-    clear: both;
+    border: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    font-family: Franklin Gothic Medium, Arial Narrow, Arial, sans-serif;
+    background-color: white;
+    padding: 0.75rem 1rem;
+}
+
+.dino + .dino{
+    border-top: none;
+}
+
+.dino-name{
+    flex-grow: 1;
+}
+
+.actions.button-group{
+    margin-bottom: 0;
 }

@@ -57,7 +57,6 @@ const app = {
         item.querySelector('.dino-type').textContent = dino.type
         item.dataset.id = dino.id
         item.classList.remove('template')
-        item.style.border = 'initial'
 
         item.querySelector('.remove').addEventListener('click', this.deleteItem.bind(this))
         item.querySelector('.fav').addEventListener('click', this.promote.bind(this))
@@ -96,11 +95,11 @@ const app = {
 
     promote (e){
         //TODO: try to find a way to get favorites to persist as well
-        if(e.target.closest('.dino').style.border === 'initial'){
-             e.target.closest('.dino').style.border = '1px solid darkslateblue'
+        if(e.target.closest('.dino').style.backgroundColor === 'white'){
+             //e.target.closest('.dino').style.border = '1px solid darkslateblue'
              e.target.closest('.dino').style.backgroundColor = 'lightyellow'
         }else{
-            e.target.closest('.dino').style.border = 'initial'
+            //e.target.closest('.dino').style.border = 'initial'
             e.target.closest('.dino').style.backgroundColor = 'white'
         }
     },
