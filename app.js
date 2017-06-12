@@ -64,25 +64,40 @@ const app = {
 
         item.querySelector('.remove').addEventListener('click', this.deleteItem.bind(this))
         item.querySelector('.fav').addEventListener('click', this.promote.bind(this, dino))
-        item.querySelector('.up').addEventListener('click', this.moveUp.bind(this))
-        item.querySelector('.down').addEventListener('click', this.moveDown.bind(this))
+        item.querySelector('.up').addEventListener('click', this.moveUp.bind(this, dino))
+        item.querySelector('.down').addEventListener('click', this.moveDown.bind(this, dino))
         item.querySelector('.edit').addEventListener('click', this.edit.bind(this))
 
         return item
     }, 
 
-    moveUp (e){
+    moveUp (dino, e){
         const li = e.target.closest('.dino');
-        if(li.previousSibling){
-            li.parentNode.insertBefore(li, li.previousSibling)
+        const index = this.dinos.findIndex((currentDino, i)=> {
+            return currentDino.id === dino.id
+        })
+        if(index > -1){
+            this.list.insertBefore(li, li.previousSibling)
+            
+            const previousDino = this.dinos[index-1]
+            this.dinos[index-1] = dino
+            this.dinos[index] = previousDino
+            window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
         }
-        //TODO: try to persist by changing the order of the array as well
     },
     
-    moveDown (e){
+    moveDown (dino, e){
         const li = e.target.closest('.dino');
-        if(li.nextSibling){
-            li.parentNode.insertBefore(li.nextSibling, li)
+        const index = this.dinos.findIndex((currentDino, i)=> {
+            return currentDino.id === dino.id
+        })
+        if(index < this.dinos.length - 1){
+            this.list.insertBefore(li.nextSibling, li)
+            
+            const nextDino = this.dinos[index+1]
+            this.dinos[index+1] = dino
+            this.dinos[index] = nextDino
+            window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
         }
     }, 
 

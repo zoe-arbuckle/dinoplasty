@@ -60,4 +60,12 @@ button:hover{
 .dino.fav{
     background-color: lightgoldenrodyellow;
     border-color: goldenrod;
+    border-top: 1px solid goldenrod;
+}
+
+.dino:first-child .up, 
+.dino:last-child .down{
+    background-color: gray;
+    color: lightgray;
+    cursor: not-allowed;
 }
