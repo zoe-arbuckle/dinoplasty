@@ -20,8 +20,8 @@
 * Make it look nice
 * Add another field to the form and make sure that data also persists across page loads
 
-###Super Mega Bonus Credit
+### Super Mega Bonus Credit
 * Edit the names of dinosaurs that are already in the list, make sure changes persist (content editable)
 
-###Super Mega Bonus Credit Hyper Fighting
+### Super Mega Bonus Credit Hyper Fighting
 * Have a good weekend! (success)
