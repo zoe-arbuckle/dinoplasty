@@ -29,3 +29,10 @@
 ## Day 5 Homework -
 * Maintain multiple different lists based on diet - categorize or make a whole new category (messages)
 
+## Super Mega Bonus Credit
+* Add a search field, only show the results that match the search criteria
+Useful items for this:
+* Array.prototype.find()
+* HTMLelement.dataset
+* display: none
+
