@@ -24,6 +24,9 @@ const app = {
         this.list.insertBefore(listItem, this.list.firstChild)
         listItem.dataset.id = ++this.max
         dino.id = listItem.dataset.id
+        if(dino.fav){
+            listItem.classList.add('fav')
+        }
     },
 
     addDino (e){
@@ -41,6 +44,7 @@ const app = {
             name: e.target.dinoName.value.toUpperCase(),
             id: ++this.max,
             type: check,
+            fav: false,
         }
 
         const listItem = this.renderListItem(dino)
@@ -59,7 +63,7 @@ const app = {
         item.classList.remove('template')
 
         item.querySelector('.remove').addEventListener('click', this.deleteItem.bind(this))
-        item.querySelector('.fav').addEventListener('click', this.promote.bind(this))
+        item.querySelector('.fav').addEventListener('click', this.promote.bind(this, dino))
         item.querySelector('.up').addEventListener('click', this.moveUp.bind(this))
         item.querySelector('.down').addEventListener('click', this.moveDown.bind(this))
         item.querySelector('.edit').addEventListener('click', this.edit.bind(this))
@@ -93,15 +97,17 @@ const app = {
         }
     },
 
-    promote (e){
-        //TODO: try to find a way to get favorites to persist as well
-        if(e.target.closest('.dino').style.backgroundColor === 'white'){
-             //e.target.closest('.dino').style.border = '1px solid darkslateblue'
-             e.target.closest('.dino').style.backgroundColor = 'lightyellow'
-        }else{
-            //e.target.closest('.dino').style.border = 'initial'
-            e.target.closest('.dino').style.backgroundColor = 'white'
+    promote (dino, e){
+        const item = e.target.closest('.dino')
+        if(dino.fav){
+            item.classList.remove('fav')
+            dino.fav = false
+        } else{
+            item.classList.add('fav')
+            dino.fav = true
         }
+
+        window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
     },
 
     edit(e){

@@ -42,6 +42,7 @@ button:hover{
     font-family: Franklin Gothic Medium, Arial Narrow, Arial, sans-serif;
     background-color: white;
     padding: 0.75rem 1rem;
+    transition: 0.25s;
 }
 
 .dino + .dino{
@@ -54,4 +55,9 @@ button:hover{
 
 .actions.button-group{
     margin-bottom: 0;
+}
+
+.dino.fav{
+    background-color: lightgoldenrodyellow;
+    border-color: goldenrod;
 }
