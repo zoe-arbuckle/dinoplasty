@@ -66,7 +66,7 @@ const app = {
         item.querySelector('.fav').addEventListener('click', this.promote.bind(this, dino))
         item.querySelector('.up').addEventListener('click', this.moveUp.bind(this, dino))
         item.querySelector('.down').addEventListener('click', this.moveDown.bind(this, dino))
-        item.querySelector('.edit').addEventListener('click', this.edit.bind(this))
+        item.querySelector('.edit').addEventListener('click', this.edit.bind(this, dino))
 
         return item
     }, 
@@ -76,7 +76,6 @@ const app = {
         const index = this.dinos.findIndex((currentDino, i)=> {
             return currentDino.id === dino.id
         })
-        console.log(index)
         if(index > 0){
             this.list.insertBefore(li, li.previousSibling)
 
@@ -114,10 +113,13 @@ const app = {
 
     promote (dino, e){
         const item = e.target.closest('.dino')
+        const icon = e.currentTarget.querySelector('i.fa')
         if(dino.fav){
+            icon.className = 'fa fa-star-o'
             item.classList.remove('fav')
             dino.fav = false
         } else{
+            icon.className = 'fa fa-star'
             item.classList.add('fav')
             dino.fav = true
         }
@@ -125,24 +127,26 @@ const app = {
         window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
     },
 
-    edit(e){
+    edit(dino, e){
         const spanType = e.target.closest('.dino').querySelector('.dino-type')
         const spanName = e.target.closest('.dino').querySelector('.dino-name')
+        const btn = e.currentTarget
+        const icon = btn.querySelector('i.fa')
+
         if(spanType.isContentEditable){
-            this.dinos[e.target.closest('.dino').dataset.id - 1].type = spanType.textContent.toUpperCase()
-            this.dinos[e.target.closest('.dino').dataset.id - 1].name = spanName.textContent.toUpperCase()
-            spanType.textContent = spanType.textContent.toUpperCase()
-            spanName.textContent = spanName.textContent.toUpperCase()
-            window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
-            e.target.style.color = 'black'
-            e.target.classList.remove('warning')
-            e.target.classList.add('success')
+            icon.className = 'fa fa-pencil'
+            btn.classList.remove('success')
+            dino.type = spanType.textContent.toUpperCase()
+            dino.name = spanName.textContent.toUpperCase()
+            spanType.textContent = dino.type
+            spanName.textContent = dino.name
             spanType.contentEditable = false
             spanName.contentEditable = false
+
+            window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
         } else　{
-            e.target.style.color = 'white'
-            e.target.classList.add('warning')
-            e.target.classList.remove('success')
+            icon.className = 'fa fa-check'
+            btn.classList.add('success')
             spanType.contentEditable = true
             spanName.contentEditable = true
             spanName.focus()

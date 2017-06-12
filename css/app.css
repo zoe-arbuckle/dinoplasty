@@ -51,6 +51,7 @@ button:hover{
 
 .dino-name{
     flex-grow: 1;
+    margin-right: 1rem;
 }
 
 .actions.button-group{
@@ -68,5 +69,5 @@ button:hover{
     background-color: gray;
     color: lightgray;
     cursor: not-allowed;
-    
+
 }
