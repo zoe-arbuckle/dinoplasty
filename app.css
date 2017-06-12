@@ -1,14 +1,29 @@
-head, title{
-    color: darkblue;
+body, html{
+    height: 100%;
 }
-    
+
+.bg{
+    background-image: url("https://s-media-cache-ak0.pinimg.com/736x/c4/4d/fb/c44dfb28bcaca0ea49da25b95c91e107.jpg");
+    height: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: black;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
 button:hover{
     box-shadow: 5px 5px 5px darkgray;
 }
 
 li{
     font-family: Franklin Gothic Medium, Arial Narrow, Arial, sans-serif;
-    background-color: whitesmoke;
+    background-color: white;
     margin: 3px;
 }
 

@@ -60,7 +60,7 @@ const app = {
         item.style.border = 'initial'
 
         item.querySelector('.remove').addEventListener('click', this.deleteItem.bind(this))
-        item.querySelector('.fav').addEventListener('click', this.promote)
+        item.querySelector('.fav').addEventListener('click', this.promote.bind(this))
         item.querySelector('.up').addEventListener('click', this.moveUp.bind(this))
         item.querySelector('.down').addEventListener('click', this.moveDown.bind(this))
         item.querySelector('.edit').addEventListener('click', this.edit.bind(this))
@@ -99,7 +99,7 @@ const app = {
              e.target.closest('.dino').style.backgroundColor = 'lightyellow'
         }else{
             e.target.closest('.dino').style.border = 'initial'
-            e.target.closest('.dino').style.backgroundColor = 'whitesmoke'
+            e.target.closest('.dino').style.backgroundColor = 'white'
         }
     },
 
