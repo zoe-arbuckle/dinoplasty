@@ -63,6 +63,7 @@ const app = {
         item.classList.remove('template')
 
         item.querySelector('.dino-name').addEventListener('keypress', this.saveOnEnter.bind(this, dino))
+        item.querySelector('.dino-type').addEventListener('keypress', this.saveOnEnter.bind(this, dino))
 
         item.querySelector('.remove').addEventListener('click', this.deleteItem.bind(this))
         item.querySelector('.fav').addEventListener('click', this.promote.bind(this, dino))
