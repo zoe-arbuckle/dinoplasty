@@ -73,6 +73,7 @@ const app = {
         if(li.previousSibling){
             li.parentNode.insertBefore(li, li.previousSibling)
         }
+        //try to persist by changing the order of the array as well
     },
     
     moveDown (e){
@@ -94,6 +95,7 @@ const app = {
     },
 
     promote (e){
+        //try to find a way to get favorites to persist as well
         if(e.target.closest('.dino').style.border === 'initial'){
              e.target.closest('.dino').style.border = '1px solid darkslateblue'
              e.target.closest('.dino').style.backgroundColor = 'lightyellow'
@@ -109,6 +111,8 @@ const app = {
         if(spanType.isContentEditable){
             this.dinos[e.target.closest('.dino').dataset.id - 1].type = spanType.textContent.toUpperCase()
             this.dinos[e.target.closest('.dino').dataset.id - 1].name = spanName.textContent.toUpperCase()
+            spanType.textContent = spanType.textContent.toUpperCase()
+            spanName.textContent = spanName.textContent.toUpperCase()
             window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
             e.target.style.color = 'black'
             e.target.classList.remove('warning')
