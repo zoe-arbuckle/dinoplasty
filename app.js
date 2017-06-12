@@ -22,7 +22,10 @@ const app = {
     addDinoLocal (dino){
         const listItem = this.renderListItem(dino)
         this.list.appendChild(listItem)
-        listItem.dataset.id = ++this.max
+        //listItem.dataset.id = ++this.max //this resets the ids, current use maintains ids
+        if(dino.id > this.max){
+            this.max = dino.id
+        }
         dino.id = listItem.dataset.id
         if(dino.fav){
             listItem.classList.add('fav')
