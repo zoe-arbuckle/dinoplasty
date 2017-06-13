@@ -1,17 +1,29 @@
 class App {
+
+    save (){
+        window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
+        window.localStorage.setItem('carniDinos', JSON.stringify(this.carniDinos))
+        window.localStorage.setItem('herbiDinos', JSON.stringify(this.herbiDinos))
+        window.localStorage.setItem('omniDinos', JSON.stringify(this.omniDinos))
+    }
+
     constructor (selectors){
         this.max = 0
         this.list = document.querySelector(selectors.listSelector)
         this.dinos = []
+        this.carniDinos = []
+        this.herbiDinos = []
+        this.omniDinos = []
+
         this.template = document.querySelector(selectors.templateSelector)
         if(window.localStorage.getItem('dinos')){
             this.dinos = JSON.parse(window.localStorage.getItem('dinos'))
             for(let i = 0; i < this.dinos.length; i++){
                 this.addDinoLocal(this.dinos[i])
             }
-            window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
+            this.save()
         }else {
-            window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
+            this.save()
         }
         document.
             querySelector(selectors.formSelector).
@@ -29,6 +41,23 @@ class App {
         dino.id = listItem.dataset.id
         if(dino.fav){
             listItem.classList.add('fav')
+        }
+        if(dino.type === 'CARNIVORE'){
+            this.carniDinos.push(dino)
+        } else if(dino.type === 'HERBIVORE'){
+            this.herbiDinos.push(dino)
+        } else {
+            this.omniDinos.push(dino)
+        }
+    }
+
+    getDinoArr(dino){
+        if(dino.type === 'CARNIVORE'){
+            return this.carniDinos
+        } else if(dino.type === 'HERBIVORE'){
+            return this.herbiDinos
+        } else {
+            return this.omniDinos
         }
     }
 
@@ -55,7 +84,9 @@ class App {
         e.target.reset()
         
         this.dinos.push(dino)
-        window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
+        this.getDinoArr(dino).push(dino)
+        
+        this.save()
     }
 
     renderListItem (dino){
@@ -89,7 +120,7 @@ class App {
             const previousDino = this.dinos[index-1]
             this.dinos[index-1] = dino
             this.dinos[index] = previousDino
-            window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
+            this.save()
         }
     }
     
@@ -103,7 +134,7 @@ class App {
             const nextDino = this.dinos[index+1]
             this.dinos[index+1] = dino
             this.dinos[index] = nextDino
-            window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
+            this.save()
         }
     }
 
@@ -112,7 +143,7 @@ class App {
         for(let i=0; i < this.dinos.length; i++){
             if(this.dinos[i].id.toString() === e.target.closest('.dino').dataset.id){
                 this.dinos.splice(i, 1)
-                window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
+                this.save()
                 break;
             }
         }
@@ -131,7 +162,7 @@ class App {
             dino.fav = true
         }
 
-        window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
+        this.save()
     }
 
     edit(dino, e){
@@ -150,7 +181,7 @@ class App {
             spanType.contentEditable = false
             spanName.contentEditable = false
 
-            window.localStorage.setItem('dinos', JSON.stringify(this.dinos))
+            this.save()
         } else　{
             icon.className = 'fa fa-check'
             btn.classList.add('success')
