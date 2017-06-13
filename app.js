@@ -42,9 +42,6 @@ class App {
         document.
             querySelector(selectors.formSelector).
             addEventListener('submit', this.addDino.bind(this))
-        document.
-            querySelector('.note-button').
-            addEventListener('click', this.addNote.bind(this))
 
         document.querySelector('#listSelect').addEventListener('change', this.displayList.bind(this))
 
@@ -116,9 +113,7 @@ class App {
     }
 
     addNote(e){
-        const note = this.renderNote()
-
-        this.notes.appendChild(note)
+        console.log('adding note')
     }
 
     renderListItem (dino){
@@ -141,9 +136,8 @@ class App {
         return item
     } 
 
-    renderNote(e){
+    renderNote(){
         const item = this.noteTemplate.cloneNode(true)
-        item.querySelector('.dino-note').textContent = "hello"
         item.classList.remove('template')
 
         return item;
