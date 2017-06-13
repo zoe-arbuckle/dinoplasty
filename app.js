@@ -7,6 +7,16 @@ class App {
         window.localStorage.setItem('omniDinos', JSON.stringify(this.omniDinos))
     }
 
+    getDinoArr(dino){
+        if(dino.type === 'CARNIVORE'){
+            return this.carniDinos
+        } else if(dino.type === 'HERBIVORE'){
+            return this.herbiDinos
+        } else {
+            return this.omniDinos
+        }
+    }
+
     constructor (selectors){
         this.max = 0
         this.list = document.querySelector(selectors.listSelector)
@@ -20,6 +30,7 @@ class App {
             this.dinos = JSON.parse(window.localStorage.getItem('dinos'))
             for(let i = 0; i < this.dinos.length; i++){
                 this.addDinoLocal(this.dinos[i])
+                this.getDinoArr(this.dinos[i]).push(this.dinos[i])
             }
             this.save()
         }else {
@@ -29,35 +40,44 @@ class App {
             querySelector(selectors.formSelector).
             addEventListener('submit', this.addDino.bind(this))
 
+        document.querySelector('#listSelect').addEventListener('change', this.displayList.bind(this))
+
+    }
+
+    displayList(e){
+        let arr = []
+        switch(e.target.value){
+            case 'Carnivores': arr = this.carniDinos;
+                                break;
+            case 'Herbivores': arr = this.herbiDinos;
+                                break;
+            case 'Omnivores': arr = this.omniDinos;
+                                break;
+            case 'All Dinos': arr = this.dinos;
+                                break;
+        }
+
+        //remove all elements from current list
+        const listChildren = this.list.childNodes;
+        for(let i = listChildren.length - 1; i > 0; i--){
+            this.list.removeChild(this.list.childNodes[i])
+        }
+        //add in the new ones
+
+        for(let i = 0; i < arr.length; i++){
+                this.addDinoLocal(arr[i])
+        }
     }
 
     addDinoLocal (dino){
         const listItem = this.renderListItem(dino)
         this.list.appendChild(listItem)
-        //listItem.dataset.id = ++this.max //this resets the ids, current use maintains ids
         if(dino.id > this.max){
             this.max = dino.id
         }
         dino.id = listItem.dataset.id
         if(dino.fav){
             listItem.classList.add('fav')
-        }
-        if(dino.type === 'CARNIVORE'){
-            this.carniDinos.push(dino)
-        } else if(dino.type === 'HERBIVORE'){
-            this.herbiDinos.push(dino)
-        } else {
-            this.omniDinos.push(dino)
-        }
-    }
-
-    getDinoArr(dino){
-        if(dino.type === 'CARNIVORE'){
-            return this.carniDinos
-        } else if(dino.type === 'HERBIVORE'){
-            return this.herbiDinos
-        } else {
-            return this.omniDinos
         }
     }
 
