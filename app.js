@@ -20,12 +20,15 @@ class App {
     constructor (selectors){
         this.max = 0
         this.list = document.querySelector(selectors.listSelector)
+        this.notes = document.querySelector(selectors.noteListSeletor)
         this.dinos = []
         this.carniDinos = []
         this.herbiDinos = []
         this.omniDinos = []
 
         this.template = document.querySelector(selectors.templateSelector)
+        this.noteTemplate = document.querySelector(selectors.noteTempSelector)
+
         if(window.localStorage.getItem('dinos')){
             this.dinos = JSON.parse(window.localStorage.getItem('dinos'))
             for(let i = 0; i < this.dinos.length; i++){
@@ -39,6 +42,9 @@ class App {
         document.
             querySelector(selectors.formSelector).
             addEventListener('submit', this.addDino.bind(this))
+        document.
+            querySelector('.note-button').
+            addEventListener('click', this.addNote.bind(this))
 
         document.querySelector('#listSelect').addEventListener('change', this.displayList.bind(this))
 
@@ -109,6 +115,12 @@ class App {
         this.save()
     }
 
+    addNote(e){
+        const note = this.renderNote()
+
+        this.notes.appendChild(note)
+    }
+
     renderListItem (dino){
         const item = this.template.cloneNode(true)
         item.querySelector('.dino-name').textContent = dino.name
@@ -128,6 +140,14 @@ class App {
 
         return item
     } 
+
+    renderNote(e){
+        const item = this.noteTemplate.cloneNode(true)
+        item.querySelector('.dino-note').textContent = "hello"
+        item.classList.remove('template')
+
+        return item;
+    }
 
     moveUp (dino, e){
         const li = e.target.closest('.dino');
@@ -222,5 +242,7 @@ class App {
 const app = new App({
     formSelector: '#dino-form', 
     listSelector: '#dino-list',
+    noteListSeletor: '#note-list',
     templateSelector: '.dino.template',
+    noteTempSelector: '.note.template',
 })
